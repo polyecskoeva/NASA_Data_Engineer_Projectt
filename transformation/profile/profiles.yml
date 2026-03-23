@@ -1,0 +1,16 @@
+luci_dbt:
+
+  outputs:
+
+    dev_live:
+      account: SANOFI-EMEA_DF_CI
+      database: DF_CI_DEV
+      user: "DF_CI_DEV_DBT_USER"
+      role: "DF_CI_DEV_DBT_ROLE"
+      private_key: "{{ env_var('DBT_USER_PRIVATEKEY') }}"
+      private_key_passphrase: "{{ env_var('DBT_USER_PASSPHRASE') }}"
+      schema: DBT_POC
+      threads: 8
+      type: snowflake
+      warehouse: EMEA_DF_CI_CWH_01
+      query_tag: "dbt"
