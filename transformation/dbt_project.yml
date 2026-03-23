@@ -1,0 +1,65 @@
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+
+name: 'luci_dbt'
+version: '0.1.0'
+
+
+# This setting configures which "profile" dbt uses for this project.
+
+profile: 'luci_dbt'
+
+# Variables
+vars:
+  data_interval_start: ""
+  data_interval_end: ""
+  airflow_dag_run_id: "manual_run"
+  airflow_dag_id: "dbt"
+ 
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages" 
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models 
+
+#flags:
+
+#  warn_error_options:
+
+#    silence: # To silence or ignore warnings
+
+#      - MissingArgumentsPropertyInGenericTestDeprecation
+
+
+models:
+  +copy_grants: true
+  +persist_docs:
+    relation: true
+    columns: true
+
+  luci_dbt:
+    01_STG:
+      cxq:
+        +schema: STG_QUALTRICS
+
+    02_PSA:
+      cxq:
+        +schema: PSA_QUALTRICS
+
+  elementary:
+    +schema: "TECH_DBT_ELEMENTARY"
+    # To disable elementary for dev, uncomment this:
+    +enabled: "{{ target.name in ['prod_live','prod_local'] }}"
+
