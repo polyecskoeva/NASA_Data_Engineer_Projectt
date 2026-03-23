@@ -1,0 +1,17 @@
+apache-airflow==2.11.0
+pyright==1.1.407
+pyright[nodejs]
+snowflake-connector-python==4.0.0
+snowflake-snowpark-python==1.44.0
+python-certifi-win32==1.6.1
+dbt-core==1.11.2
+dbt-snowflake==1.11.1
+ruff==0.14.4
+sqlfluff[rs]==4.0.4
+sqlfluff-templater-dbt==4.0.4
+pydantic==2.12.4
+pandas==2.2.3
+openpyxl==3.1.5
+modin
+python-dotenv==1.2.1
+elementary-data==0.22.0
